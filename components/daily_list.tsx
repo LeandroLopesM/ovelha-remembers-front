@@ -1,5 +1,6 @@
 import { DailyList } from "@/app/util/types";
-import { SERVER_ADDR, style } from "@/conf";
+import { style } from "@/conf";
+import statelyFetch from "@/scripts/statelyFetch";
 import { useEffect, useState } from "react";
 import { ActivityIndicator, FlatList, Text, View } from "react-native";
 import Failure from "./utils/failure";
@@ -9,17 +10,14 @@ export default function DailyTasks() {
     const [data, setData] = useState<string[]>([]);
 
     const getDaily = async () => {
-        try {
-            const response = await fetch(`${SERVER_ADDR}/daily`);
-            const json = (await response.json()) as DailyList;
-            setData(json.items);
-        } catch (error) {
-            console.error(error);
-            // setData(['Failed to reach server'])
-            setProgress('fail')
-            return
-        } 
-        setProgress('ok');
+        statelyFetch<DailyList>('ovelhas')
+            .then(it => {
+                setData(it.items)
+                setProgress('ok')
+            })
+            .catch(err => {
+                setProgress('fail')
+            })
     }
 
     useEffect(() => { getDaily(); }, []);
