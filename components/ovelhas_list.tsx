@@ -1,24 +1,23 @@
 import { Ovelha, OvelhaList } from "@/app/util/types";
-import { SERVER_ADDR, style } from "@/conf";
-import Ionicons from '@expo/vector-icons';
+import { style } from "@/conf";
+import statelyFetch from "@/scripts/statelyFetch";
 import { useEffect, useState } from "react";
 import { ActivityIndicator, FlatList, Text, View } from "react-native";
+import Failure from "./utils/failure";
 
 export default function OvelhasList() {
-    const [isLoading, setLoading] = useState(true);
+    const [progress, setProgress] = useState('wait');
     const [data, setData] = useState<Ovelha[] | string[]>([]);
 
     const getDalvas = async () => {
-        try {
-            const response = await fetch(`${SERVER_ADDR}/ovelhas`);
-            const json = (await response.json()) as OvelhaList;
-            setData(json.items);
-        } catch (error) {
-            console.error(error);
-            setData([])
-        } finally {
-            setLoading(false);
-        }
+        statelyFetch<OvelhaList>('ovelhas')
+            .then(it => {
+                setData(it.items)
+                setProgress('ok')
+            })
+            .catch(err => {
+                setProgress('fail')
+            })
     }
 
     useEffect(() => { getDalvas(); }, []);
@@ -26,17 +25,21 @@ export default function OvelhasList() {
     return (
         <View style={style.subContainer}>
             {
-            isLoading ? (
+            progress === 'wait' ? (
                 <ActivityIndicator></ActivityIndicator>
-            ) : (
+            ) : 
+            progress === 'ok' ? (
                 <FlatList
                     data={data as Ovelha[]}
                     renderItem={({item}) => (
-                        <Ionicons name="checkmark-circle" size={32} />
+                        // <Ionicons name="checkmark-circle" size={32} />
+                        <Text>{item.id}</Text>
                     )}
                     ListEmptyComponent={() => (
-                        <Text>Sem ovelhas :(</Text>
+                        <Text>Sem ovelhas!</Text>
                     )}></FlatList>
+            ) : (
+                <Failure>Falha ao carregar ovelhas</Failure>
             )
             }
         </View>
