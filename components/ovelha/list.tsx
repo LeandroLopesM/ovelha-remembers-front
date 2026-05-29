@@ -4,9 +4,10 @@ import statelyFetch from "@/scripts/statelyFetch";
 import { TESTING_OLIST } from "@/scripts/testing_data";
 import FontAwesome5 from '@expo/vector-icons/FontAwesome5';
 import React, { useEffect, useState } from "react";
-import { ActivityIndicator, FlatList, Modal, StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
-import OvelhaCard from "./ovelha_card";
-import Failure from "./utils/failure";
+import { ActivityIndicator, FlatList, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import OvelhaCard from "../ovelha/card";
+import Failure from "../utils/failure";
+import OvelhaPusher from "./push";
 
 export default function OvelhasList() {
     const [progress, setProgress] = useState('wait');
@@ -33,26 +34,14 @@ export default function OvelhasList() {
 
     const [ovelhaManagerVisible, setOvelhaManagerVisible] = useState(false)
     const [OMName, setOMName] = useState<string>('')
-    const [OMNasc, setOMNasc] = useState<Date>(new Date(0))
+    const [OMNasc, setOMNasc] = useState<string>('')
     const [OMGen, setOMGen] = useState<string>('')
 
     return (
         <View style={style.subContainer}>
-            {/* //TODO: Finish modal para adicionar ovelha!! */}
-            <Modal
-                style={OMStyle.popup}
-                visible={ovelhaManagerVisible}
-                transparent={true}
-                onRequestClose={() => {
-                    setOvelhaManagerVisible(!ovelhaManagerVisible);
-                }}>
-                <TextInput onChangeText={setOMName} placeholder="Nome"></TextInput>
-                <TextInput onChangeText={t => setOMNasc(new Date(t))} placeholder="Nascimento"></TextInput>
-                <TextInput onChangeText={setOMGen} placeholder="Gênero"></TextInput>
-                <TouchableOpacity onPress={(_) => setOvelhaManagerVisible(false)}>Pronto</TouchableOpacity>
-            </Modal>
+            <OvelhaPusher isOpen={ovelhaManagerVisible} setOpen={setOvelhaManagerVisible} />
 
-            <TouchableOpacity style={oStyle.subSubContainer} onPress={(_) => setOvelhaManagerVisible(true)}>
+            <TouchableOpacity style={oStyle.subSubContainer} onPress={_ => setOvelhaManagerVisible(true)}>
                 <Text style={[oStyle.title, style.dailyTitle]}>Ovelhas</Text>
                 <FontAwesome5 name="plus" size={24} color="black" style={oStyle.add} />
             </TouchableOpacity>
@@ -97,20 +86,3 @@ const oStyle = StyleSheet.create({
     }
 })
 
-const OMStyle = StyleSheet.create({
-    popup: {
-        margin: 20,
-        backgroundColor: 'white',
-        borderRadius: 20,
-        padding: 35,
-        alignItems: 'center',
-        shadowColor: '#000',
-        shadowOffset: {
-        width: 0,
-        height: 2,
-        },
-        shadowOpacity: 0.25,
-        shadowRadius: 4,
-        elevation: 5,
-    },
-})

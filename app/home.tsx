@@ -1,5 +1,5 @@
 import DailyTasks from "@/components/daily_list";
-import OvelhasList from "@/components/ovelhas_list";
+import OvelhasList from "@/components/ovelha/list";
 import { style } from "@/conf";
 import { Text, View } from "react-native";
 
