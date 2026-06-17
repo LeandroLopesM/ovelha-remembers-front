@@ -1,7 +1,7 @@
-import { DailyList } from "@/app/util/types";
 import { style } from "@/conf";
 import statelyFetch from "@/scripts/statelyFetch";
 import { TESTING_DLIST } from "@/scripts/testing_data";
+import { DailyList } from "@/scripts/types";
 import { useEffect, useState } from "react";
 import { ActivityIndicator, FlatList, Text, View } from "react-native";
 import Failure from "./utils/failure";

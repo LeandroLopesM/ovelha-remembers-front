@@ -1,7 +1,7 @@
-import { Ovelha, OvelhaList } from "@/app/util/types";
 import { style } from "@/conf";
 import statelyFetch from "@/scripts/statelyFetch";
 import { TESTING_OLIST } from "@/scripts/testing_data";
+import { Ovelha, OvelhaList } from "@/scripts/types";
 import FontAwesome5 from '@expo/vector-icons/FontAwesome5';
 import React, { useEffect, useState } from "react";
 import { ActivityIndicator, FlatList, StyleSheet, Text, TouchableOpacity, View } from "react-native";
@@ -9,10 +9,16 @@ import OvelhaCard from "../ovelha/card";
 import Failure from "../utils/failure";
 import OvelhaPusher from "./push";
 
+export var data: Ovelha[], setData: (arg0: Ovelha[]) => void;
+
+export function newData(ov: Ovelha) {
+    setData([...data, ov])
+}
+
 export default function OvelhasList() {
     const [progress, setProgress] = useState('wait');
     const [err, setErr] = useState(Error('No details'));
-    const [data, setData] = useState<Ovelha[] | string[]>([]);
+    [data, setData] = useState<Ovelha[]>([]);
 
     const getDalvas = async () => {
         statelyFetch<OvelhaList>('ovelhas')
@@ -33,10 +39,6 @@ export default function OvelhasList() {
     useEffect(() => { getDalvas(); }, []);
 
     const [ovelhaManagerVisible, setOvelhaManagerVisible] = useState(false)
-    const [OMName, setOMName] = useState<string>('')
-    const [OMNasc, setOMNasc] = useState<string>('')
-    const [OMGen, setOMGen] = useState<string>('')
-
     return (
         <View style={style.subContainer}>
             <OvelhaPusher isOpen={ovelhaManagerVisible} setOpen={setOvelhaManagerVisible} />

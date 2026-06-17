@@ -1,4 +1,4 @@
-import { DailyList, OvelhaList } from "@/app/util/types"
+import { DailyList, OvelhaList } from "@/scripts/types"
 
 export const TESTING_OLIST: OvelhaList = { items:[
     {

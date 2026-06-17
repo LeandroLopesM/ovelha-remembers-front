@@ -1,11 +1,14 @@
+import { Ovelha } from "@/scripts/types"
 import { useState } from "react"
 import { Modal, StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native"
+import { store } from "../../scripts/storage"
+import { newData } from "./list"
 
 type OvelhaPusherArgs = { isOpen: boolean, setOpen: (a: boolean) => void }
 export default function OvelhaPusher({isOpen, setOpen}: OvelhaPusherArgs) {
 
     var [Name, setName] = useState<string>()
-    var [Nasc, setNasc] = useState<string>()
+    var [ Nasc, setNasc] = useState<string>()
     var [Gen, setGen] = useState<string>()
     return (
         <Modal
@@ -29,11 +32,21 @@ export default function OvelhaPusher({isOpen, setOpen}: OvelhaPusherArgs) {
                         placeholder=" Gênero" />
                     <TouchableOpacity style={Style.submitContainer} onPress={(_) => {
                         setOpen(false)
-                        store(JSON.stringify({
-                            name: Name,
-                            nascimento: setNasc,
-                            generio: Gen
-                        }))
+                        let ovelha: Ovelha = {
+                            id: 0,
+                            name: Name || 'Sem nome',
+                            birthday: new Date(Nasc || ''),
+                            sexo: Gen || 'Sem genero',
+                            vacinas: [],
+                            weight: Math.random() * 100,
+                            race: '',
+                            lastTosa: new Date('')
+                        };
+                        store(
+                        'ovelhas',
+                        JSON.stringify(ovelha))
+
+                        newData(ovelha);
                     }}>
                         <Text style={Style.submit}>Pronto</Text>
                     </TouchableOpacity>

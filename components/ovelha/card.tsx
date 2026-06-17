@@ -1,4 +1,4 @@
-import { Ovelha } from '@/app/util/types';
+import { Ovelha } from '@/scripts/types';
 import AntDesign from '@expo/vector-icons/AntDesign';
 import { ReactNode } from 'react';
 import { StyleSheet, Text, View } from "react-native";
