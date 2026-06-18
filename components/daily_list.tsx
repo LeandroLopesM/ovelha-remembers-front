@@ -43,6 +43,17 @@ export default function DailyTasks() {
         );
     };
 
+    const strikeThrough = (idx: number) => {
+        if (taskStateList[idx] ?? false) {
+            return StyleSheet.create({
+                std: {
+                    textDecorationLine: 'line-through'
+                }
+            })
+        }
+        return StyleSheet.create({std: {}})
+    }
+
     return (
         <View style={[style.subContainer, taskStyle.container]}>
             <Text style={style.dailyTitle}>Lembretes Diários</Text>
@@ -61,7 +72,8 @@ export default function DailyTasks() {
                                         value={taskStateList[index] ?? false}
                                         onValueChange={(value) => addDynamicState(index, value)}
                                     />
-                                    <Text style={taskStyle.taskListItem}>{item}</Text>
+                                    <Text
+                                        style={[taskStyle.taskListItem, strikeThrough(index).std]}>{item}</Text>
                                 </View>
                             )}
                         }></FlatList>
@@ -88,7 +100,7 @@ const taskStyle = StyleSheet.create({
     },
 
     taskListItem: {
-        fontSize: '18px'
+        fontSize: 18
     },
     container: {
         height: '60%'
