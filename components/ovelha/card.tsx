@@ -1,7 +1,8 @@
 import { Ovelha } from '@/scripts/types';
 import AntDesign from '@expo/vector-icons/AntDesign';
+import { router } from 'expo-router';
 import { ReactNode } from 'react';
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
 type OvelhaCardProps = {
     info: Ovelha,
@@ -11,7 +12,19 @@ export default function OvelhaCard({info}: OvelhaCardProps) {
     return (
         <View style={style.container}>
             <Text style={style.name}>{info.name}</Text>
-            <AntDesign name="caret-right" size={15} color="black" style={style.proceed}/>
+            <TouchableOpacity
+                style={style.proceed}
+                onPress={() =>
+                    router.push({
+                        pathname: '/ovelha_info',
+                        params: {
+                            info: JSON.stringify(info)
+                        },
+                    })
+                }
+            >
+                <AntDesign name="caret-right" size={15} color="black"/>
+            </TouchableOpacity>
         </View>
     )
 }
