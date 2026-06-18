@@ -25,9 +25,9 @@ export function newOvelha() {
                 lastTosa: randomDate()
             } as Ovelha;
 
-            store('ovelhas', JSON.stringify(json))
+            store('ovelhas', JSON.stringify(json));
 
-            console.log(`Criado falso ídolo com sucesso nomeado ${text}`)
+            console.log(`Criado falso ídolo com sucesso nomeado ${text}`);
             newData(json);
         })
 }

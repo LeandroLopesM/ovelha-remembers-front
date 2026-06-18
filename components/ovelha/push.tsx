@@ -47,6 +47,9 @@ export default function OvelhaPusher({isOpen, setOpen}: OvelhaPusherArgs) {
                         JSON.stringify(ovelha))
 
                         newData(ovelha);
+
+                        setName(undefined);
+                        setGen(undefined);
                     }}>
                         <Text style={Style.submit}>Pronto</Text>
                     </TouchableOpacity>

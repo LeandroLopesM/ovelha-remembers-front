@@ -25,8 +25,9 @@ export const TESTING_OLIST: OvelhaList = { items:[
 }
 
 export const TESTING_DLIST: DailyList = { items: [
-    'coner',
-    'viver',
-    'morer'
+    'Alimentar',
+    'Trocar água',
+    'Levar ao pasto',
+    'Recolher'
 ]
 } 
