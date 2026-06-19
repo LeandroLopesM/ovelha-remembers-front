@@ -10,12 +10,27 @@ export type OvelhaInfoProps = {
     info: Ovelha
 };
 
+function formatData(d: Date): string {
+    let now = new Date();
+    
+    if (Math.abs(now.getFullYear() - d.getFullYear()) > 0) {
+        return Math.abs(d.getFullYear() - now.getFullYear()) + ' anos atrás';
+    }
+    else if(Math.abs(now.getDay() - d.getDay()) > 0) {
+        return Math.abs(d.getDay() - now.getDay()) + ' dias atrás';
+    }
+
+    return d.getHours() - now.getHours() + ' horas atrás';
+}
+
 export default function OvelhaInfoPage() {
     const info: Ovelha = JSON.parse((useLocalSearchParams().info || '{}') as string);
 
+    console.log(info);
+
     return (
         <View style={style.main}>
-            <Header color={'#007D77'} />
+            <Header color={'#007D77'} title={info.name}/>
             {/* {JSON.stringify(info)} */}
 
             <View style={[style.subContainer]}>
@@ -31,11 +46,11 @@ export default function OvelhaInfoPage() {
                 <hr style={ovelhaStyle.hr} />
 
                 <View style={ovelhaStyle.infoContainer}>
-                    <Text style={ovelhaStyle.info}><b>Idade:</b> {info.birthday.toString()} </Text>
+                    <Text style={ovelhaStyle.info}><b>Idade:</b> {formatData(new Date(info.birthday))} </Text>
                     <Text style={ovelhaStyle.info}><b>Sexo:</b> {info.sexo} </Text>
                     <Text style={ovelhaStyle.info}><b>Peso:</b> {info.peso} </Text>
                     <Text style={ovelhaStyle.info}><b>Raça:</b> {info.race} </Text>
-                    <Text style={ovelhaStyle.info}><b>Ultima tosa:</b> {info.lastTosa.toString()} </Text>
+                    <Text style={ovelhaStyle.info}><b>Ultima tosa:</b> {formatData(new Date(info.lastTosa))} </Text>
                 </View>
 
                 <hr style={ovelhaStyle.hr} />
@@ -62,7 +77,9 @@ export default function OvelhaInfoPage() {
                             </View>
                         )}
                         ListEmptyComponent={() => (
-                            <Text>Sem vacinas!</Text>
+                            <View style={{position: 'static', height: '100%'}}>
+                                <Text style={{margin: 'auto', marginTop: 20, fontSize: 20}}>Sem vacinas!</Text>
+                            </View>
                         )} />
                 </View>
             </View>
