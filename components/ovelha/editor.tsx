@@ -37,11 +37,11 @@ export default function Popup(props: PopupProps) {
                     }
 
                     <TextInput
-                        style={style.userInput}
+                        style={[style.userInput, {width: '100%'}]}
                         onChangeText={ text => {setForm(prev => ({...prev, name: text}))} }
                         placeholder=" Nome" value={props.ovelha.name}/>
                     {/* <TextInput
-                        style={style.userInput}
+                        style={[style.userInput, {width: '100%'}]}
                         onChangeText={ text => {setForm(prev => ({...prev, birthday: new Date(text)}))} }
                         placeholder=" Nascimento" value={props.ovelha.birthday.getD}/> */}
                     <DateInput 
@@ -50,15 +50,15 @@ export default function Popup(props: PopupProps) {
                         value={props.ovelha.birthday}/>
 
                     <TextInput
-                        style={style.userInput}
+                        style={[style.userInput, {width: '100%'}]}
                         onChangeText={ text => {setForm(prev => ({...prev, race: text}))} }
                         placeholder=" Raça" value={props.ovelha.race}/>
                     <TextInput
-                        style={style.userInput}
+                        style={[style.userInput, {width: '100%'}]}
                         onChangeText={ text => {setForm(prev => ({...prev, sexo: text}))} }
                         placeholder=" Sexo" value={props.ovelha.sexo}/>
                     <TextInput
-                        style={style.userInput}
+                        style={[style.userInput, {width: '100%'}]}
                         onChangeText={ text => {setForm(prev => ({...prev, peso: +text}))} }
                         placeholder=" Peso (Kg)" value={'' + props.ovelha.peso}/>
 

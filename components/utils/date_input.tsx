@@ -1,4 +1,3 @@
-import { style } from "@/conf"
 import { useState } from "react"
 import { Text, TextInput, View } from "react-native"
 
@@ -13,24 +12,25 @@ export default function DateInput(props: DateInputProps) {
     const [date, setDate] = useState(defaultDate);
     
     return (
-        <View style={{flexDirection: 'row', maxWidth: '100%' }}>
+        <View style={{flexDirection: 'row', width: '100%', alignItems: 'center', justifyContent: 'center', gap: 2 }}>
             <Text
-                style={{fontSize: 21, margin: 'auto'}}>{props.text}: </Text>
+                style={{fontSize: 21, width: '40%'}}>{props.text}</Text>
             <TextInput
-                style={[{ maxWidth: '30%', fontSize: 21 }]}
+                style={[{ maxWidth: '20%', textAlign: 'center', borderWidth: 1, borderColor: 'gray', fontSize: 21 }]}
                 placeholder={'Dia'}
                 value={'' + defaultDate.getDate()}
                 onChangeText={text => setDate(prev => { prev.setDate(+text); props.onDateChange(prev); return prev })}/>
             <TextInput
-                style={[{ maxWidth: '30%', fontSize: 21 }]}
+                style={[{ maxWidth: '20%', textAlign: 'center', borderWidth: 1, borderColor: 'gray', fontSize: 21 }]}
                 placeholder={'Mês'}
                 value={'' + defaultDate.getMonth()}
                 onChangeText={text => setDate(prev => { prev.setMonth(+text); props.onDateChange(prev); return prev })}/>
             <TextInput
-                style={[{ maxWidth: '30%', fontSize: 21 }]}
+                style={[{ maxWidth: '20%', textAlign: 'center', borderWidth: 1, borderColor: 'gray', fontSize: 21 }]}
                 placeholder={'Ano'}
                 value={'' + defaultDate.getFullYear()}
                 onChangeText={text => setDate(prev => { prev.setFullYear(+text); props.onDateChange(prev); return prev })}/>
+
         </View>
     )
 }
