@@ -1,5 +1,5 @@
 import { style } from "@/conf";
-import statelyFetch from "@/scripts/statelyFetch";
+import statelyFetch from "@/scripts/stately_fetch";
 import { Ovelha } from "@/scripts/types";
 import FontAwesome5 from '@expo/vector-icons/FontAwesome5';
 import React, { useEffect, useState } from "react";
