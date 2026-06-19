@@ -1,12 +1,13 @@
 import Header from "@/components/header";
-import Popup from "@/components/ovelha/editor";
+import Popup, { compareUndefined } from "@/components/ovelha/editor";
+import DateInput from "@/components/utils/date_input";
 import { style } from "@/conf";
 import { TESTING_URI } from "@/scripts/testing_data";
-import { Ovelha } from "@/scripts/types";
+import { OptionalOvelha, Ovelha } from "@/scripts/types";
 import AntDesign from "@expo/vector-icons/AntDesign";
 import { useLocalSearchParams } from "expo-router";
 import { useState } from "react";
-import { FlatList, Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { FlatList, Image, StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
 
 export type OvelhaInfoProps = {
     info: Ovelha
@@ -31,6 +32,7 @@ export default function OvelhaInfoPage() {
     console.log(info);
 
     const [editorVisible, setEditorVisible] = useState(false);
+    const [form, setForm] = useState<OptionalOvelha>({})
 
     return (
         <View style={style.main}>
@@ -41,7 +43,46 @@ export default function OvelhaInfoPage() {
                 isVisible={editorVisible}
                 label={'Editar ovelha'}
                 ovelha={info}
-                setOvelha={setInfo}></Popup>
+                setOvelha={setInfo}
+                onSubmit={
+                    () => {
+                        setEditorVisible(false)
+                        
+                        setInfo((prev: Ovelha) => ({
+                            name: compareUndefined(form.name, prev.name),
+                            birthday: compareUndefined(form.birthday, prev.birthday),
+                            race: compareUndefined(form.race, prev.race),
+                            sexo: compareUndefined(form.sexo, prev.sexo),
+                            peso: compareUndefined(form.peso, prev.peso),
+                        }))
+                    }
+                }>
+                <TextInput
+                    style={[style.userInput, {width: '100%'}]}
+                    onChangeText={ text => {setForm(prev => ({...prev, name: text}))} }
+                    placeholder=" Nome" value={info.name}/>
+                {/* <TextInput
+                    style={[style.userInput, {width: '100%'}]}
+                    onChangeText={ text => {setForm(prev => ({...prev, birthday: new Date(text)}))} }
+                    placeholder=" Nascimento" value={info.birthday.getD}/> */}
+                <DateInput 
+                    onDateChange={ (date: Date) => setForm(prev => ({ ...prev, birthday: date })) }
+                    text={'Nascimento'}
+                    value={info.birthday}/>
+
+                <TextInput
+                    style={[style.userInput, {width: '100%'}]}
+                    onChangeText={ text => {setForm(prev => ({...prev, race: text}))} }
+                    placeholder=" Raça" value={info.race}/>
+                <TextInput
+                    style={[style.userInput, {width: '100%'}]}
+                    onChangeText={ text => {setForm(prev => ({...prev, sexo: text}))} }
+                    placeholder=" Sexo" value={info.sexo}/>
+                <TextInput
+                    style={[style.userInput, {width: '100%'}]}
+                    onChangeText={ text => {setForm(prev => ({...prev, peso: +text}))} }
+                    placeholder=" Peso (Kg)" value={'' + info.peso}/>
+            </Popup>
 
             <View style={[style.subContainer]}>
                 <View style={ovelhaStyle.card}>
