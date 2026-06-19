@@ -1,5 +1,6 @@
 import Header from "@/components/header";
 import { style } from "@/conf";
+import { TESTING_URI } from "@/scripts/testing_data";
 import { Ovelha } from "@/scripts/types";
 import AntDesign from "@expo/vector-icons/AntDesign";
 import { useLocalSearchParams } from "expo-router";
@@ -14,28 +15,42 @@ export default function OvelhaInfoPage() {
 
     return (
         <View style={style.main}>
-            <Header color={'purple'} />
+            <Header color={'#007D77'} />
             {/* {JSON.stringify(info)} */}
 
             <View style={[style.subContainer]}>
-                <View>
-                    <AntDesign name='edit' size={24} color='black' />
-                    <Image />
-                    <AntDesign name='delete' size={24} color='black' />
+                <View style={ovelhaStyle.card}>
+                    <AntDesign name='edit' size={32} color='black' style={ovelhaStyle.leftAlign} />
+                    <Image
+                        source={{uri: info.photo || TESTING_URI}}
+                        style={{minWidth: '80%', minHeight: '30%'}}
+                        resizeMode={'contain'}/>
+                    <AntDesign name='delete' size={32} color='black' style={ovelhaStyle.rightAlign} />
                 </View>
 
-                <View>
-                    <Text>Idade: </Text>
-                    <Text>Sexo: </Text>
-                    <Text>Peso: </Text>
-                    <Text>Raça: </Text>
-                    <Text>Ultima tosa: </Text>
+                <hr style={ovelhaStyle.hr} />
+
+                <View style={ovelhaStyle.infoContainer}>
+                    <Text style={ovelhaStyle.info}><b>Idade:</b> {info.birthday.toString()} </Text>
+                    <Text style={ovelhaStyle.info}><b>Sexo:</b> {info.sexo} </Text>
+                    <Text style={ovelhaStyle.info}><b>Peso:</b> {info.peso} </Text>
+                    <Text style={ovelhaStyle.info}><b>Raça:</b> {info.race} </Text>
+                    <Text style={ovelhaStyle.info}><b>Ultima tosa:</b> {info.lastTosa.toString()} </Text>
                 </View>
 
-                <View>
-                    <TouchableOpacity>
-                        <Text>Próximas vacinas</Text>
-                        <AntDesign name='arrow-right' size={24} color='black' />
+                <hr style={ovelhaStyle.hr} />
+
+                <View style={ovelhaStyle.vacinaContainer}>
+                    <TouchableOpacity style={ovelhaStyle.vacinaHeader}>
+                        <Text style={{
+                            fontSize: 24,
+                            marginLeft: 'auto'
+                        }}><b>Próximas vacinas</b></Text>
+                        
+                        <AntDesign name='arrow-right' size={32} color='black' style={{
+                            margin: 'auto',
+                            marginRight: 20,
+                        }}/>
                     </TouchableOpacity>
 
                     <FlatList
@@ -56,5 +71,51 @@ export default function OvelhaInfoPage() {
 }
 
 export const ovelhaStyle = StyleSheet.create({
+    card: {
+        position: 'static',
+        width: '100%',
+        height: '20%',
+        flexDirection: 'row'
+    },
 
+    rightAlign: {
+        marginRight: 10,
+        // marginLeft: 20,
+        margin: 'auto',
+    },
+
+    leftAlign: {
+        marginLeft: 10,
+        // margin: 0,
+        margin: 'auto',
+    },
+
+    infoContainer: {
+        width: '100%',
+        maxHeight: '60%',
+    },
+
+    info: {
+        fontSize: 20
+    },
+
+    hr: {
+        width: '80%',
+        height: '0%',
+        
+        margin: 'auto',
+        marginTop: '5%',
+        marginBottom: '5%',
+        
+        borderColor: 'black',
+        borderWidth: 1,
+    },
+
+    vacinaContainer: {
+        flexDirection: 'column'
+    },
+    vacinaHeader: {
+        flexDirection: 'row'
+    }
 });
+

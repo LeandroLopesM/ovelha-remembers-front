@@ -11,7 +11,8 @@ export type Ovelha = {
     birthday: Date,
     vacinas: Array<Vacina>,
     sexo: string,
-    weight: number,
+    peso: number,
     race: string,
-    lastTosa: Date
+    lastTosa: Date,
+    photo: string
 }

@@ -20,7 +20,7 @@ export function newOvelha() {
                 birthday: randomDate(),
                 vacinas: [],
                 sexo: text[0],
-                weight: Math.random() * 100,
+                peso: Math.random() * 100,
                 race: 'ciborgue',
                 lastTosa: randomDate()
             } as Ovelha;

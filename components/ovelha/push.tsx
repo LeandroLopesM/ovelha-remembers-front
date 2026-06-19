@@ -38,7 +38,7 @@ export default function OvelhaPusher({isOpen, setOpen}: OvelhaPusherArgs) {
                             birthday: new Date(Nasc || ''),
                             sexo: Gen || 'Sem genero',
                             vacinas: [],
-                            weight: Math.random() * 100,
+                            peso: Math.random() * 100,
                             race: '',
                             lastTosa: new Date('')
                         };
