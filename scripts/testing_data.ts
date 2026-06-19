@@ -1,3 +1,5 @@
+import { store } from "./storage";
+
 export const TESTING_URI = "https://i.pinimg.com/1200x/43/0e/4b/430e4b54758a1aab08cb1d571f46c307.jpg"
 
 export const TESTING_OLIST = [
@@ -31,3 +33,6 @@ export const TESTING_DLIST: Array<string> = [
     'Levar ao pasto',
     'Recolher'
 ] 
+
+store('ovelhas', JSON.stringify(TESTING_OLIST));
+store('tasks', JSON.stringify(TESTING_DLIST));

@@ -39,7 +39,8 @@ export function store(key: string, data: string) {
 
 export function load(key: string): string {
     if (LOCAL_STORAGE.get(key) === undefined) {
-        throw Error("No such item");
+        console.error(LOCAL_STORAGE)
+        throw Error("No such item " + key);
     }
 
     console.log(`Got ${key}:${LOCAL_STORAGE.get(key) || 'nothing'}`)
