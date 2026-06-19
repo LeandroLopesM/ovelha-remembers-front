@@ -1,7 +1,6 @@
 import { style } from "@/conf";
 import statelyFetch from "@/scripts/statelyFetch";
-import { TESTING_OLIST } from "@/scripts/testing_data";
-import { Ovelha, OvelhaList } from "@/scripts/types";
+import { Ovelha } from "@/scripts/types";
 import FontAwesome5 from '@expo/vector-icons/FontAwesome5';
 import React, { useEffect, useState } from "react";
 import { ActivityIndicator, FlatList, StyleSheet, Text, TouchableOpacity, View } from "react-native";
@@ -20,23 +19,19 @@ export default function OvelhasList() {
     const [err, setErr] = useState(Error('No details'));
     [data, setData] = useState<Ovelha[]>([]);
 
-    const getDalvas = async () => {
-        statelyFetch<OvelhaList>('ovelhas')
+    const getOvelhas = async () => {
+        statelyFetch<Ovelha[]>('ovelhas')
             .then(it => {
-                setData(it.items)
+                setData(it)
                 setProgress('ok')
             })
             .catch(err => {
                 setErr(err)
                 setProgress('fail')
             })
-            .finally(( ) => { // Here for testing
-                setProgress('ok')
-                setData(TESTING_OLIST.items)
-            })
     }
 
-    useEffect(() => { getDalvas(); }, []);
+    useEffect(() => { getOvelhas(); }, []);
 
     const [ovelhaManagerVisible, setOvelhaManagerVisible] = useState(false)
     return (
@@ -47,6 +42,7 @@ export default function OvelhasList() {
                 <Text style={[oStyle.title, style.dailyTitle]}>Ovelhas</Text>
                 <FontAwesome5 name="plus" size={24} color="black" style={oStyle.add} />
             </TouchableOpacity>
+
             {
             progress === 'wait' ? (
                 <ActivityIndicator></ActivityIndicator>

@@ -1,6 +1,4 @@
-import { DailyList, OvelhaList } from "@/scripts/types"
-
-export const TESTING_OLIST: OvelhaList = { items:[
+export const TESTING_OLIST = [
     {
         id: 1,
         name: 'Dalva',
@@ -22,12 +20,10 @@ export const TESTING_OLIST: OvelhaList = { items:[
         weight: 380
     },
 ]
-}
 
-export const TESTING_DLIST: DailyList = { items: [
+export const TESTING_DLIST: Array<string> = [
     'Alimentar',
     'Trocar água',
     'Levar ao pasto',
     'Recolher'
-]
-} 
+] 

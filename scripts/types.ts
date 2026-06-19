@@ -1,6 +1,3 @@
-export type DailyList = {
-    items: Array<string>
-};
 
 export type Vacina = {
     name: string,
@@ -17,8 +14,4 @@ export type Ovelha = {
     weight: number,
     race: string,
     lastTosa: Date
-};
-
-export type OvelhaList = {
-    items: Array<Ovelha>
 }

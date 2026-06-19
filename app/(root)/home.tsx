@@ -1,4 +1,5 @@
-import DailyTasks from "@/components/daily_list";
+import DailyList from "@/components/daily/daily_list";
+import Header from "@/components/header";
 import OvelhasList from "@/components/ovelha/list";
 import { style } from "@/conf";
 import { newOvelha } from "@/scripts/storage";
@@ -8,14 +9,11 @@ export default function Home() {
     return (
         <View style={style.main}>
             <TouchableOpacity onPress={() => newOvelha()}><Text>Criar ovelha dev</Text></TouchableOpacity>
+            {/* DEV: (Remove before flight) */}
 
-            <View style={style.header}>
-                <Text style={style.title}>Ovelha Remembers</Text>
-            </View>
-
-            <DailyTasks />  
-                
+            <Header />
+            <DailyList />
             <OvelhasList />
-        </View> 
+        </View>
     );
 }
