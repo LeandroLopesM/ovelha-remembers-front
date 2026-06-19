@@ -48,5 +48,45 @@ export const style = StyleSheet.create({
     ovelhaItem: {
         color: 'black',
         padding: 'auto'
+    },
+    popup: {
+        minHeight: '30%',
+        minWidth: '70%',
+        maxWidth: '80%',
+        maxHeight: '80%',
+        backgroundColor: 'white',
+        borderRadius: 10,
+        padding: 35,
+        alignItems: 'center',
+        margin: 'auto',
+        gap: 7, 
+    },
+    popupBG: {
+        backgroundColor: 'rgba(0, 0, 0, 0.3)',
+        height: '100%',
+        alignItems: 'center',
+    },
+    userInput: {
+        width: '90%',
+        height: '20%',
+        fontSize: 21,
+        borderColor: 'gray',
+        borderWidth: 1,
+        outline: 'none' 
+    },
+    submitContainer: {
+        backgroundColor: 'green',
+        color: 'white',
+        margin: 'auto',
+        width: '90%',
+        height: '20%',
+        textAlign: 'center',
+        verticalAlign: 'middle',
+    },
+    submit: {
+        color: 'white',
+        margin: 'auto',
     }
 });
+
+

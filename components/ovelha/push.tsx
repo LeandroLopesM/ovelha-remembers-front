@@ -1,6 +1,7 @@
+import { style } from "@/conf"
 import { Ovelha } from "@/scripts/types"
 import { useState } from "react"
-import { Modal, StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native"
+import { Modal, Text, TextInput, TouchableOpacity, View } from "react-native"
 import { store } from "../../scripts/storage"
 import { newData } from "./list"
 
@@ -16,21 +17,21 @@ export default function OvelhaPusher({isOpen, setOpen}: OvelhaPusherArgs) {
             transparent={true}
             onRequestClose={_ => setOpen(!isOpen)}>
                 
-            <View style={Style.popupBG}>
-                <View style={Style.popup}>
+            <View style={style.popupBG}>
+                <View style={style.popup}>
                     <TextInput
-                        style={Style.userInput}
+                        style={style.userInput}
                         onChangeText={setName}
                         placeholder=" Nome" />
                     <TextInput
-                        style={Style.userInput}
+                        style={style.userInput}
                         onChangeText={setNasc}
                         placeholder=" Nascimento" />
                     <TextInput
-                        style={Style.userInput}
+                        style={style.userInput}
                         onChangeText={setGen}
                         placeholder=" Gênero" />
-                    <TouchableOpacity style={Style.submitContainer} onPress={(_) => {
+                    <TouchableOpacity style={style.submitContainer} onPress={(_) => {
                         setOpen(false)
                         let ovelha: Ovelha = {
                             id: 0,
@@ -51,49 +52,10 @@ export default function OvelhaPusher({isOpen, setOpen}: OvelhaPusherArgs) {
                         setName(undefined);
                         setGen(undefined);
                     }}>
-                        <Text style={Style.submit}>Pronto</Text>
+                        <Text style={style.submit}>Pronto</Text>
                     </TouchableOpacity>
                 </View>
             </View>
         </Modal>
     )
 }
-
-const Style = StyleSheet.create({
-    popup: {
-        minHeight: '30%',
-        minWidth: '70%',
-        backgroundColor: 'white',
-        borderRadius: 10,
-        padding: 35,
-        alignItems: 'center',
-        margin: 'auto',
-        gap: 7, 
-    },
-    popupBG: {
-        backgroundColor: 'rgba(0, 0, 0, 0.3)',
-        height: '100%',
-        alignItems: 'center',
-    },
-    userInput: {
-        width: '90%',
-        height: '20%',
-        fontSize: 21,
-        borderColor: 'gray',
-        borderWidth: 1,
-        outline: 'none' 
-    },
-    submitContainer: {
-        backgroundColor: 'green',
-        color: 'white',
-        margin: 'auto',
-        width: '90%',
-        height: '20%',
-        textAlign: 'center',
-        verticalAlign: 'middle',
-    },
-    submit: {
-        color: 'white',
-        margin: 'auto',
-    }
-})

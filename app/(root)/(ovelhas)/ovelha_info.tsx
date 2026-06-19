@@ -1,9 +1,11 @@
 import Header from "@/components/header";
+import Popup from "@/components/ovelha/editor";
 import { style } from "@/conf";
 import { TESTING_URI } from "@/scripts/testing_data";
 import { Ovelha } from "@/scripts/types";
 import AntDesign from "@expo/vector-icons/AntDesign";
 import { useLocalSearchParams } from "expo-router";
+import { useState } from "react";
 import { FlatList, Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
 export type OvelhaInfoProps = {
@@ -24,23 +26,42 @@ function formatData(d: Date): string {
 }
 
 export default function OvelhaInfoPage() {
-    const info: Ovelha = JSON.parse((useLocalSearchParams().info || '{}') as string);
+    const [info, setInfo] = useState(JSON.parse((useLocalSearchParams().info || '{}') as string));
 
     console.log(info);
+
+    const [editorVisible, setEditorVisible] = useState(false);
 
     return (
         <View style={style.main}>
             <Header color={'#007D77'} title={info.name}/>
-            {/* {JSON.stringify(info)} */}
+            
+            <Popup
+                setVisible={setEditorVisible}
+                isVisible={editorVisible}
+                label={'Editar ovelha'}
+                ovelha={info}
+                setOvelha={setInfo}></Popup>
 
             <View style={[style.subContainer]}>
                 <View style={ovelhaStyle.card}>
-                    <AntDesign name='edit' size={32} color='black' style={ovelhaStyle.leftAlign} />
+                    <AntDesign
+                        name='edit'
+                        size={32}
+                        color='black'
+                        style={ovelhaStyle.leftAlign}
+                        onPress={() => setEditorVisible(!editorVisible)}/>
+
                     <Image
                         source={{uri: info.photo || TESTING_URI}}
                         style={{minWidth: '80%', minHeight: '30%'}}
                         resizeMode={'contain'}/>
-                    <AntDesign name='delete' size={32} color='black' style={ovelhaStyle.rightAlign} />
+
+                    <AntDesign
+                        name='delete'
+                        size={32}
+                        color='black'
+                        style={ovelhaStyle.rightAlign}/>
                 </View>
 
                 <hr style={ovelhaStyle.hr} />
