@@ -10,6 +10,16 @@ function randomDate() {
     return new Date(start.getTime() + Math.random() * (end.getTime() - start.getTime()));
 }
 
+export function remove<T>(key: string, who: T) {
+    let db = JSON.parse(LOCAL_STORAGE.get(key)!) as T[];
+
+    var i = db.indexOf(who) || -1;
+    if (i < 0) throw Error(`DB[${key}] Attempt to delete nonexistant value ${JSON.stringify(who)}`);
+
+    db.splice(i, 1);
+    LOCAL_STORAGE.set(key, JSON.stringify(db))
+}
+
 export function newOvelha() {
     fetch('https://random-word-api.herokuapp.com/word')
         .then(resp => resp.json())

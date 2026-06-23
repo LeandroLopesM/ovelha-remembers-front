@@ -3,7 +3,7 @@ import { OptionalOvelha, Ovelha } from "@/scripts/types";
 import { useState } from "react";
 import { TextInput } from "react-native";
 import DateInput from "../utils/date_input";
-import Popup, { compareUndefined } from "./editor";
+import Popup, { compareUndefined } from "../utils/form_modal";
 
 type OvelhaEditorProps = {
     info: Ovelha,

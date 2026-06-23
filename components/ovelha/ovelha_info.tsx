@@ -2,7 +2,7 @@ import { TESTING_URI } from "@/scripts/testing_data";
 import AntDesign from "@expo/vector-icons/AntDesign";
 import { Image, StyleSheet, View } from "react-native";
 
-export default function OvelhaInfoCard({photo, editorVisible, setEditorVisible}: any) {
+export default function OvelhaInfoCard({photo, editorVisible, setEditorVisible, deleteVisible, setDeleteVisible}: any) {
     return (
         <View style={ocStyle.card}>
             <AntDesign
@@ -21,7 +21,8 @@ export default function OvelhaInfoCard({photo, editorVisible, setEditorVisible}:
                 name='delete'
                 size={32}
                 color='black'
-                style={ocStyle.rightAlign}/>
+                style={ocStyle.rightAlign}
+                onPress={() => setDeleteVisible(!deleteVisible)}/>
         </View>
     )
 }
