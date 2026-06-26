@@ -1,4 +1,4 @@
-import DailyList from "@/components/daily/daily_list";
+import DailyList from "@/components/daily/list";
 import Header from "@/components/header";
 import OvelhasList from "@/components/ovelha/list";
 import { style } from "@/conf";

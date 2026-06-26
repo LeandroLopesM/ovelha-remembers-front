@@ -1,5 +1,5 @@
 import { style } from "@/conf";
-import statelyFetch from "@/scripts/stately_fetch";
+import statelyFetch from "@/scripts/storage";
 import { Ovelha } from "@/scripts/types";
 import FontAwesome5 from '@expo/vector-icons/FontAwesome5';
 import React, { useEffect, useState } from "react";
@@ -36,7 +36,7 @@ export default function OvelhasList() {
     const [ovelhaManagerVisible, setOvelhaManagerVisible] = useState(false)
     return (
         <View style={style.subContainer}>
-            <OvelhaPusher isOpen={ovelhaManagerVisible} setOpen={setOvelhaManagerVisible} />
+            <OvelhaPusher output={newData} isOpen={ovelhaManagerVisible} setOpen={setOvelhaManagerVisible} />
 
             <TouchableOpacity style={oStyle.subSubContainer} onPress={_ => setOvelhaManagerVisible(true)}>
                 <Text style={[oStyle.title, style.dailyTitle]}>Ovelhas</Text>

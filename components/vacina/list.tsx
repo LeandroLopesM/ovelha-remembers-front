@@ -1,11 +1,10 @@
-import { ovelhaStyle } from "@/app/(root)/(ovelhas)/ovelha_info";
 import { style } from "@/conf";
-import statelyFetch from "@/scripts/stately_fetch";
+import statelyFetch from "@/scripts/storage";
 import { Vacina } from "@/scripts/types";
 import AntDesign from "@expo/vector-icons/AntDesign";
 import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
 import { useEffect, useState } from "react";
-import { ActivityIndicator, FlatList, Text, TouchableOpacity, View } from "react-native";
+import { ActivityIndicator, FlatList, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import Failure from "../utils/failure";
 
 export var data: Vacina[], setData: (arg0: Vacina[]) => void;
@@ -30,7 +29,7 @@ export default function VacinaList({vacinaEditor, setVacinaEditor} : any) {
     useEffect(() => { getVacinas(); }, []);
     
     return (
-        <View style={ovelhaStyle.vacinaContainer}>
+        <View style={vacinaStyle.vacinaContainer}>
             
             <TouchableOpacity style={{display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'center', gap: 10}} onPress={_ => setVacinaEditor(true)}>
                 <Text style={{
@@ -91,3 +90,12 @@ export default function VacinaList({vacinaEditor, setVacinaEditor} : any) {
         </View>
     )
 }
+
+export const vacinaStyle = StyleSheet.create({
+    vacinaContainer: {
+        flexDirection: 'column'
+    },
+    vacinaHeader: {
+        flexDirection: 'row'
+    }
+});

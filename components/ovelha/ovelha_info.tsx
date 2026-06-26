@@ -33,17 +33,14 @@ const ocStyle = StyleSheet.create({
         height: '20%',
         flexDirection: 'row'
     },
-
     rightAlign: {
         marginRight: 10,
         // marginLeft: 20,
         margin: 'auto',
     },
-
     leftAlign: {
         marginLeft: 10,
         // margin: 0,
         margin: 'auto',
     },
-
 })

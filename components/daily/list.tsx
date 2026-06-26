@@ -1,5 +1,5 @@
 import { style } from "@/conf";
-import statelyFetch from "@/scripts/stately_fetch";
+import statelyFetch from "@/scripts/storage";
 import { useEffect, useState } from "react";
 import { ActivityIndicator, FlatList, StyleSheet, Text, View } from "react-native";
 import Failure from "../utils/failure";

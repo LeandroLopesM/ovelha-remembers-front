@@ -10,6 +10,10 @@ function randomDate() {
     return new Date(start.getTime() + Math.random() * (end.getTime() - start.getTime()));
 }
 
+export default async function statelyFetch<T>(endpoint: string): Promise<T> {
+    return JSON.parse(load(endpoint)) as T;
+}
+
 export function newOvelha() {
     fetch('https://random-word-api.herokuapp.com/word')
         .then(resp => resp.json())

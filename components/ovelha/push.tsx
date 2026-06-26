@@ -3,10 +3,14 @@ import { Ovelha } from "@/scripts/types"
 import { useState } from "react"
 import { Modal, Text, TextInput, TouchableOpacity, View } from "react-native"
 import { store } from "../../scripts/storage"
-import { newData } from "./list"
 
-type OvelhaPusherArgs = { isOpen: boolean, setOpen: (a: boolean) => void }
-export default function OvelhaPusher({isOpen, setOpen}: OvelhaPusherArgs) {
+type OvelhaPusherArgs = {
+    isOpen: boolean,
+    setOpen: (a: boolean) => void,
+    output: (a: Ovelha) => void
+}
+
+export default function OvelhaPusher({isOpen, setOpen, output}: OvelhaPusherArgs) {
 
     var [Name, setName] = useState<string>()
     var [ Nasc, setNasc] = useState<string>()
@@ -47,7 +51,7 @@ export default function OvelhaPusher({isOpen, setOpen}: OvelhaPusherArgs) {
                         'ovelhas',
                         JSON.stringify(ovelha))
 
-                        newData(ovelha);
+                        output(ovelha);
 
                         setName(undefined);
                         setGen(undefined);
