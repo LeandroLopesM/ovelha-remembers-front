@@ -8,7 +8,7 @@ type OvelhaCardProps = {
     info: Ovelha,
     children?: string | ReactNode
 }
-export default function OvelhaCard({info}: OvelhaCardProps) {
+export default function OvelhaEntry({info}: OvelhaCardProps) {
     return (
         <View style={style.container}>
             <Text style={style.name}>{info.name}</Text>

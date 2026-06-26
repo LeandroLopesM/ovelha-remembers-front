@@ -2,7 +2,7 @@ import { style } from "@/conf"
 import { Ovelha } from "@/scripts/types"
 import { useState } from "react"
 import { Modal, Text, TextInput, TouchableOpacity, View } from "react-native"
-import { store } from "../../scripts/storage"
+import { store } from "../../../scripts/storage"
 
 type OvelhaPusherArgs = {
     isOpen: boolean,
@@ -10,7 +10,7 @@ type OvelhaPusherArgs = {
     output: (a: Ovelha) => void
 }
 
-export default function OvelhaPusher({isOpen, setOpen, output}: OvelhaPusherArgs) {
+export default function OvelhaCreator({isOpen, setOpen, output}: OvelhaPusherArgs) {
 
     var [Name, setName] = useState<string>()
     var [ Nasc, setNasc] = useState<string>()

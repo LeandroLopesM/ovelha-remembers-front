@@ -2,11 +2,11 @@ import { style } from "@/conf";
 import statelyFetch from "@/scripts/storage";
 import { Ovelha } from "@/scripts/types";
 import FontAwesome5 from '@expo/vector-icons/FontAwesome5';
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { ActivityIndicator, FlatList, StyleSheet, Text, TouchableOpacity, View } from "react-native";
-import OvelhaCard from "../ovelha/card";
 import Failure from "../utils/failure";
-import OvelhaPusher from "./push";
+import OvelhaEntry from "./entry";
+import OvelhaCreator from "./modals/creator";
 
 export var data: Ovelha[], setData: (arg0: Ovelha[]) => void;
 
@@ -36,7 +36,7 @@ export default function OvelhasList() {
     const [ovelhaManagerVisible, setOvelhaManagerVisible] = useState(false)
     return (
         <View style={style.subContainer}>
-            <OvelhaPusher output={newData} isOpen={ovelhaManagerVisible} setOpen={setOvelhaManagerVisible} />
+            <OvelhaCreator output={newData} isOpen={ovelhaManagerVisible} setOpen={setOvelhaManagerVisible} />
 
             <TouchableOpacity style={oStyle.subSubContainer} onPress={_ => setOvelhaManagerVisible(true)}>
                 <Text style={[oStyle.title, style.dailyTitle]}>Ovelhas</Text>
@@ -52,7 +52,7 @@ export default function OvelhasList() {
                     data={data as Ovelha[]}
                     renderItem={({item}) => (
                         // <Ionicons name="checkmark-circle" size={32} />
-                        <OvelhaCard info={item}></OvelhaCard>
+                        <OvelhaEntry info={item}></OvelhaEntry>
                     )}
                     ListEmptyComponent={() => (
                         <Text>Sem ovelhas!</Text>

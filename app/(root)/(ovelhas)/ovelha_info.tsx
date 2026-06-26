@@ -1,7 +1,7 @@
 import Header from "@/components/header";
-import OvelhaExtraInfo from "@/components/ovelha/extra_info";
-import OvelhaEditor from "@/components/ovelha/ovelha_editor";
-import OvelhaInfoCard from "@/components/ovelha/ovelha_info";
+import OvelhaExtraInfo from "@/components/ovelha/info/extra";
+import OvelhaInfoHeader from "@/components/ovelha/info/header";
+import OvelhaEditor from "@/components/ovelha/modals/editor";
 import VacinaList from "@/components/vacina/list";
 import { style } from "@/conf";
 import { Ovelha } from "@/scripts/types";
@@ -32,7 +32,7 @@ export default function OvelhaInfoPage() {
                 editorVisible={editorVisible} />
 
             <View style={[style.subContainer]}>
-                <OvelhaInfoCard
+                <OvelhaInfoHeader
                     photo={info.photo}
                     setEditorVisible={setEditorVisible}
                     editorVisible={editorVisible} />

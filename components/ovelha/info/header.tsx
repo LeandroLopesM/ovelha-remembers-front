@@ -2,7 +2,7 @@ import { TESTING_URI } from "@/scripts/testing_data";
 import AntDesign from "@expo/vector-icons/AntDesign";
 import { Image, StyleSheet, View } from "react-native";
 
-export default function OvelhaInfoCard({photo, editorVisible, setEditorVisible}: any) {
+export default function OvelhaInfoHeader({photo, editorVisible, setEditorVisible}: any) {
     return (
         <View style={ocStyle.card}>
             <AntDesign
