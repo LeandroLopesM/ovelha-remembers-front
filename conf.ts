@@ -86,6 +86,9 @@ export const style = StyleSheet.create({
     submit: {
         color: 'white',
         margin: 'auto',
+    },
+    vacina: {
+        fontSize: 16
     }
 });
 

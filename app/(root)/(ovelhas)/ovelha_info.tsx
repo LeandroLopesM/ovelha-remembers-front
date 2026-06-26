@@ -16,6 +16,8 @@ export type OvelhaInfoProps = {
 export default function OvelhaInfoPage() {
     const [info, setInfo] = useState(JSON.parse((useLocalSearchParams().info || '{}') as string));
     const [editorVisible, setEditorVisible] = useState(false);
+    const [vacinaEditor, setVacinaEditor] = useState(false);
+    // TODO: implement vacina editor
 
     console.log(info);
 
@@ -41,7 +43,7 @@ export default function OvelhaInfoPage() {
 
                 <hr style={ovelhaStyle.hr} />
 
-                <VacinaList info={info} />
+                <VacinaList vacinaEditor={vacinaEditor} setVacinaEditor={setVacinaEditor} />
             </View>
         </View>
     )

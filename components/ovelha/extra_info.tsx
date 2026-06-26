@@ -1,7 +1,7 @@
 import { ovelhaStyle } from "@/app/(root)/(ovelhas)/ovelha_info";
 import { Text, View } from "react-native";
 
-function formatData(d: Date): string {
+export function formatData(d: Date): string {
     let now = new Date();
     
     if (Math.abs(now.getFullYear() - d.getFullYear()) > 0) {

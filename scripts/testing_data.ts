@@ -1,4 +1,5 @@
 import { store } from "./storage";
+import { Vacina } from "./types";
 
 export const TESTING_URI = "https://i.pinimg.com/1200x/43/0e/4b/430e4b54758a1aab08cb1d571f46c307.jpg"
 
@@ -34,5 +35,21 @@ export const TESTING_DLIST: Array<string> = [
     'Recolher'
 ] 
 
+export const TESTING_VLIST : Array<Vacina> = [
+    {
+        ovelha: 1,
+        name: 'hepatites',
+        date: new Date(10),
+        due: new Date(11)
+    },
+    {
+        ovelha: 1,
+        name: 'doencas',
+        date: new Date(11),
+        due: new Date(14)
+    }
+] 
+
 store('ovelhas', JSON.stringify(TESTING_OLIST));
 store('tasks', JSON.stringify(TESTING_DLIST));
+store('vacinas', JSON.stringify(TESTING_VLIST));
