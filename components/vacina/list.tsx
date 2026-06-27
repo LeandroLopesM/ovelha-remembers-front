@@ -24,13 +24,13 @@ export default function VacinaList({vacinas} : any) {
 
             <VacinaEditor
                 info={data[editorTarget]}
-                setInfo={(fn: (a: Vacina) => Vacina) => {
+                setInfo={(newData: Vacina) => {
                     let edited = data;
-                    edited[editorTarget] = fn(data[editorTarget]);
+                    edited[editorTarget] = newData;
 
                     setData(edited)
                 }}
-                editorVisible={vacinaEditor}
+                editorVisible={vacinaEditor}    
                 setEditorVisible={setVacinaEditor}/>
             
             <FlatList

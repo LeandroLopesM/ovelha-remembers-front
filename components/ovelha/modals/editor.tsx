@@ -1,9 +1,9 @@
 import { style } from "@/conf";
-import { OptionalOvelha, Ovelha } from "@/scripts/types";
+import { Ovelha } from "@/scripts/types";
 import { useState } from "react";
 import { TextInput } from "react-native";
 import DateInput from "../../utils/date_input";
-import Popup, { compareUndefined } from "../../utils/editor";
+import Popup from "../../utils/editor";
 
 type OvelhaEditorProps = {
     info: Ovelha,
@@ -13,7 +13,7 @@ type OvelhaEditorProps = {
 }
 
 export default function OvelhaEditor({info, setInfo, setEditorVisible, editorVisible}: OvelhaEditorProps) {
-    const [form, setForm] = useState<OptionalOvelha>({})
+    const [form, setForm] = useState<Ovelha>(info)
 
     return( 
         <Popup
@@ -24,35 +24,29 @@ export default function OvelhaEditor({info, setInfo, setEditorVisible, editorVis
                 () => {
                     setEditorVisible(false)
                     
-                    setInfo((prev: Ovelha) => ({
-                        name: compareUndefined(form.name, prev.name),
-                        birthday: compareUndefined(form.birthday, prev.birthday),
-                        race: compareUndefined(form.race, prev.race),
-                        sexo: compareUndefined(form.sexo, prev.sexo),
-                        peso: compareUndefined(form.peso, prev.peso),
-                    }))
+                    setInfo(form)
                 }
             }>
             <TextInput
                 style={[style.userInput, {width: '100%'}]}
                 onChangeText={ text => {setForm(prev => ({...prev, name: text}))} }
-                placeholder=" Nome" value={info.name}/>
+                placeholder=" Nome" value={form.name}/>
             <DateInput 
                 onDateChange={ (date: Date) => setForm(prev => ({ ...prev, birthday: date })) }
                 text={'Nascimento'}
-                value={info.birthday}/>
+                value={form.birthday}/>
             <TextInput
                 style={[style.userInput, {width: '100%'}]}
                 onChangeText={ text => {setForm(prev => ({...prev, race: text}))} }
-                placeholder=" Raça" value={info.race}/>
+                placeholder=" Raça" value={form.race}/>
             <TextInput
                 style={[style.userInput, {width: '100%'}]}
                 onChangeText={ text => {setForm(prev => ({...prev, sexo: text}))} }
-                placeholder=" Sexo" value={info.sexo}/>
+                placeholder=" Sexo" value={form.sexo}/>
             <TextInput
                 style={[style.userInput, {width: '100%'}]}
                 onChangeText={ text => {setForm(prev => ({...prev, peso: +text}))} }
-                placeholder=" Peso (Kg)" value={'' + info.peso}/>
+                placeholder=" Peso (Kg)" value={'' + form.peso}/>
         </Popup>
     )
 }

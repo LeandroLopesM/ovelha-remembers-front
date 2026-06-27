@@ -67,7 +67,7 @@ export const style = StyleSheet.create({
         alignItems: 'center',
     },
     userInput: {
-        width: '90%',
+        width: '100%',
         height: '20%',
         fontSize: 21,
         borderColor: 'gray',

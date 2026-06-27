@@ -1,9 +1,9 @@
 import { style } from "@/conf";
-import { OptionalVacina, Vacina } from "@/scripts/types";
+import { Vacina } from "@/scripts/types";
 import { useState } from "react";
 import { TextInput } from "react-native";
 import DateInput from "../utils/date_input";
-import Popup, { compareUndefined } from "../utils/editor";
+import Popup from "../utils/editor";
 
 
 type VacinaEditorProps = {
@@ -14,7 +14,7 @@ type VacinaEditorProps = {
 }
 
 export default function VacinaEditor({info, setInfo, setEditorVisible, editorVisible}: VacinaEditorProps) {
-    const [form, setForm] = useState<OptionalVacina>({})
+    const [form, setForm] = useState<Vacina>(info)
 
     return( 
         <Popup
@@ -25,17 +25,13 @@ export default function VacinaEditor({info, setInfo, setEditorVisible, editorVis
                 () => {
                     setEditorVisible(false)
                     
-                    setInfo((prev: Vacina) => ({
-                        date: compareUndefined(form.date, prev.date),
-                        name: compareUndefined(form.name, prev.name),
-                        due: compareUndefined(form.due, prev.due),
-                    }))
+                    setInfo(form)
                 }
             }>
             <TextInput
-                style={[style.userInput, {width: '100%'}]}
+                style={[style.userInput]}
                 onChangeText={ text => {setForm(prev => ({...prev, name: text}))} }
-                placeholder=" Nome" value={info.name}/>
+                placeholder=" Nome" value={form.name}/>
             <DateInput 
                 onDateChange={ (date: Date) => setForm(prev => ({ ...prev, date: date })) }
                 text={'Data'}
