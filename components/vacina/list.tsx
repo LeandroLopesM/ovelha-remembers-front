@@ -3,36 +3,18 @@ import { Vacina } from "@/scripts/types";
 import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
 import { useState } from "react";
 import { FlatList, StyleSheet, Text, TouchableOpacity, View } from "react-native";
-import VacinaEditor from "./editor";
 import VacinaEntry from "./entry";
 
-export var data: Vacina[], setData: (arg0: Vacina[]) => void;
-
 export default function VacinaList({vacinas} : any) {
-    const [err, setErr] = useState(Error('No details'));
-    const [vacinaEditor, setVacinaEditor] = useState(false);
-    const [editorTarget, setEditorTarget] = useState(0);
-    
-    [data, setData] = useState<Vacina[]>(vacinas);
+    const [data, setData] = useState<Vacina[]>(vacinas);
     
     return (
         <View style={style.subContainer}>            
-            <TouchableOpacity style={localStyle.subSubContainer} onPress={_ => setVacinaEditor(true)}>
+            <TouchableOpacity style={localStyle.subSubContainer} onPress={_ => {}}>
                 <Text style={[localStyle.title, style.listTitle]}>Vacinas</Text>
                 <FontAwesome5 name="plus" size={24} color="black" style={localStyle.add} />
             </TouchableOpacity>
 
-            <VacinaEditor
-                info={data[editorTarget]}
-                setInfo={(newData: Vacina) => {
-                    let edited = data;
-                    edited[editorTarget] = newData;
-
-                    setData(edited)
-                }}
-                editorVisible={vacinaEditor}    
-                setEditorVisible={setVacinaEditor}/>
-            
             <FlatList
                 data={data}
                 ListHeaderComponent={() => (
@@ -42,14 +24,11 @@ export default function VacinaList({vacinas} : any) {
                         <Text>Vencimento</Text>
                     </View>
                 )}
-
                 renderItem={({item, index}) => (
                     <VacinaEntry
-                        editorVisible={vacinaEditor}
-                        setEditorVisible={setVacinaEditor}
-                        item={item}
-                        index={index}
-                        setEditorTarget={setEditorTarget}/>
+                        data={data}
+                        setData={setData}
+                        index={index}/>
                 )}
 
                 ListEmptyComponent={() => (

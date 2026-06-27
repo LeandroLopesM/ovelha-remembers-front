@@ -1,15 +1,8 @@
 
 export type Vacina = {
-    ovelha: number,
     name: string,
     date: Date,
     due: Date
-}
-
-export type OptionalVacina = {
-    name?: string,
-    date?: Date,
-    due?: Date
 }
 
 export type Ovelha = {
@@ -21,18 +14,6 @@ export type Ovelha = {
     peso: number,
     race: string,
     lastTosa: Date,
-    photo?: string
-}
-
-export type OptionalOvelha = {
-    id?: number,
-    name?: string,
-    birthday?: Date,
-    vacinas?: Array<Vacina>,
-    sexo?: string,
-    peso?: number,
-    race?: string,
-    lastTosa?: Date,
     photo?: string
 }
 

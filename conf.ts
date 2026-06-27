@@ -62,6 +62,7 @@ export const style = StyleSheet.create({
         gap: 7, 
     },
     popupBG: {
+        // position: 'absolute',
         backgroundColor: 'rgba(0, 0, 0, 0.3)',
         height: '100%',
         alignItems: 'center',

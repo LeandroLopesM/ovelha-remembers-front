@@ -21,15 +21,12 @@ export default function VacinaEditor({info, setInfo, setEditorVisible, editorVis
             setVisible={setEditorVisible}
             isVisible={editorVisible}
             label={'Editar vacina'}
-            onSubmit={
-                () => {
-                    setEditorVisible(false)
-                    
-                    setInfo(form)
-                }
-            }>
+            onSubmit={() => {
+                setEditorVisible(false)
+                setInfo(form)
+            }}>
             <TextInput
-                style={[style.userInput]}
+                style={style.userInput}
                 onChangeText={ text => {setForm(prev => ({...prev, name: text}))} }
                 placeholder=" Nome" value={form.name}/>
             <DateInput 
