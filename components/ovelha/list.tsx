@@ -39,7 +39,7 @@ export default function OvelhasList() {
             <OvelhaCreator output={newData} isOpen={ovelhaManagerVisible} setOpen={setOvelhaManagerVisible} />
 
             <TouchableOpacity style={oStyle.subSubContainer} onPress={_ => setOvelhaManagerVisible(true)}>
-                <Text style={[oStyle.title, style.dailyTitle]}>Ovelhas</Text>
+                <Text style={[oStyle.title, style.listTitle]}>Ovelhas</Text>
                 <FontAwesome5 name="plus" size={24} color="black" style={oStyle.add} />
             </TouchableOpacity>
 

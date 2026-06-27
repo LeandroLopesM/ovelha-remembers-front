@@ -1,5 +1,4 @@
 import { style } from "@/conf";
-import { Ovelha } from "@/scripts/types";
 import React from "react";
 import { Modal, Text, TouchableOpacity, View } from "react-native";
 
@@ -9,8 +8,6 @@ export type PopupProps = {
     setVisible: any,
 
     onSubmit: () => void,
-    ovelha: Ovelha,
-    setOvelha: any,
 
     children: any
 }
@@ -33,16 +30,15 @@ export default function Popup(props: PopupProps) {
             <View style={style.popupBG}>
                 <View style={style.popup}>
                     {
-                        props.label? (<Text style={style.dailyTitle}>{props.label}</Text>) : (<></>)
+                        props.label? (<Text style={style.listTitle}>{props.label}</Text>) : (<></>)
                     }
 
                     {props.children}
 
                     <TouchableOpacity
-                        onPress={props.onSubmit}>
-                        <View>
-                            <Text>Pronto</Text>
-                        </View>
+                        onPress={props.onSubmit}
+                        style={style.submitContainer}>
+                        <Text style={style.submit}>Pronto</Text>
                     </TouchableOpacity>
                 </View>
             </View>

@@ -20,8 +20,6 @@ export default function OvelhaEditor({info, setInfo, setEditorVisible, editorVis
             setVisible={setEditorVisible}
             isVisible={editorVisible}
             label={'Editar ovelha'}
-            ovelha={info}
-            setOvelha={setInfo}
             onSubmit={
                 () => {
                     setEditorVisible(false)

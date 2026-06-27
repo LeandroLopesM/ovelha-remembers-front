@@ -31,7 +31,7 @@ export const style = StyleSheet.create({
         fontFamily: 'Consolas',
         margin: 'auto'
     },
-    dailyTitle: {
+    listTitle: {
         color: 'black',
         fontSize: 25,
         fontWeight: 'bold',

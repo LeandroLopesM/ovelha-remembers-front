@@ -28,7 +28,7 @@ export default function DailyList() {
 
     return (
         <View style={[style.subContainer, listStyle.container]}>
-            <Text style={style.dailyTitle}>Lembretes Diários</Text>
+            <Text style={style.listTitle}>Lembretes Diários</Text>
             {
                 fetchProgress === 'wait' ? (
                     <ActivityIndicator></ActivityIndicator>

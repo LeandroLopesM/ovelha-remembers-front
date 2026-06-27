@@ -1,51 +1,49 @@
 import { style } from "@/conf";
-import { Vacina } from "@/scripts/types";
-import React from "react";
-import { Modal, Text, TouchableOpacity, View } from "react-native";
+import { OptionalVacina, Vacina } from "@/scripts/types";
+import { useState } from "react";
+import { TextInput } from "react-native";
+import DateInput from "../utils/date_input";
+import Popup, { compareUndefined } from "../utils/editor";
 
-export type PopupProps = {
-    label?: string
-    isVisible: boolean
-    setVisible: any,
 
-    onSubmit: () => void,
-    vacina: Vacina,
-    setVacina: any,
-
-    children: any
+type VacinaEditorProps = {
+    info: Vacina
+    setInfo: any
+    editorVisible: boolean
+    setEditorVisible: any
 }
 
-export function compareUndefined<T>(maybeUdefined: T | undefined, defaultVal: T): T {
-    if (maybeUdefined === undefined) {
-        return defaultVal
-    }
-    return maybeUdefined != defaultVal? maybeUdefined : defaultVal;
-}
+export default function VacinaEditor({info, setInfo, setEditorVisible, editorVisible}: VacinaEditorProps) {
+    const [form, setForm] = useState<OptionalVacina>({})
 
-export default function Popup(props: PopupProps) {
-    
-    return (
-        <Modal
-            visible={props.isVisible}
-            onRequestClose={() => props.setVisible(!props.isVisible)}
-            transparent={true}>
-            
-            <View style={style.popupBG}>
-                <View style={style.popup}>
-                    {
-                        props.label? (<Text style={style.dailyTitle}>{props.label}</Text>) : (<></>)
-                    }
-
-                    {props.children}
-
-                    <TouchableOpacity
-                        onPress={props.onSubmit}>
-                        <View>
-                            <Text>Pronto</Text>
-                        </View>
-                    </TouchableOpacity>
-                </View>
-            </View>
-        </Modal>
+    return( 
+        <Popup
+            setVisible={setEditorVisible}
+            isVisible={editorVisible}
+            label={'Editar vacina'}
+            onSubmit={
+                () => {
+                    setEditorVisible(false)
+                    
+                    setInfo((prev: Vacina) => ({
+                        date: compareUndefined(form.date, prev.date),
+                        name: compareUndefined(form.name, prev.name),
+                        due: compareUndefined(form.due, prev.due),
+                    }))
+                }
+            }>
+            <TextInput
+                style={[style.userInput, {width: '100%'}]}
+                onChangeText={ text => {setForm(prev => ({...prev, name: text}))} }
+                placeholder=" Nome" value={info.name}/>
+            <DateInput 
+                onDateChange={ (date: Date) => setForm(prev => ({ ...prev, date: date })) }
+                text={'Data'}
+                value={info.date}/>
+            <DateInput 
+                onDateChange={ (due: Date) => setForm(prev => ({ ...prev, due: due })) }
+                text={'Vencimento'}
+                value={info.due}/>
+        </Popup>
     )
 }
